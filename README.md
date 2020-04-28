@@ -1,5 +1,5 @@
 ## Prerequisites
-- Python 3.0 and above
+- Python 3.6 and above
 - install requirements (use: `pip install -r requirements.txt`)
 ## Usage
 For Basic usage just enter your package number:
