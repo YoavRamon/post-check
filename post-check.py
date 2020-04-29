@@ -3,11 +3,25 @@ import requests
 import argparse
 import pprint
 import json
+import os
 
+class EnvDefault(argparse.Action):
+    def __init__(self, envvar, required=True, default=None, **kwargs):
+        if not default and envvar:
+            if envvar in os.environ:
+                default = os.environ[envvar]
+        if required and default:
+            required = False
+        super(EnvDefault, self).__init__(default=default, required=required, 
+                                         **kwargs)
+
+    def __call__(self, parser, namespace, values, option_string=None):
+        setattr(namespace, self.dest, values)
 
 def _parse_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('-pn', '--package-number', type=str, required=True, help='Package number')
+    parser.add_argument('-pn', '--package-number', type=str, required=True, help='Package number, you may use the PKG environment variable as well', 
+                        action=EnvDefault, envvar="PKG")
     parser.add_argument('-ih', '--is-heb', action='store_true', required=False, help='Print in hebrew')
     parser.add_argument('-pj', '--print-json', action='store_true', required=False, help='Print json instead of table')
     parser.add_argument('-cf', '--cookie-file', type=str, required=False, default='cookie.json', help='Cookie file')

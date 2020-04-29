@@ -22,6 +22,7 @@ optional arguments:
   -h, --help            show this help message and exit
   -pn PACKAGE_NUMBER, --package-number PACKAGE_NUMBER
                         Package number
+                        Optionally, the PKG environment variable may be used instead
   -ih, --is-heb         Print in hebrew
   -pj, --print-json     Print json instead of table
   -cf COOKIE_FILE, --cookie-file COOKIE_FILE
